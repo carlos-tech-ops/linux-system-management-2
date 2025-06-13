@@ -20,15 +20,16 @@
 linux-system-management-2/
 ├── README.md
 ├── outputs/
-│   ├── 01-shadow-file.txt
+│   ├── 01a-shadow-passwd-d.txt
+│   ├── 01b-shadow-passwd-l.txt
 │   ├── 02-ulimit-output.txt
-│   ├── 03-mv-test-output.txt
-│   └── 04-mkdir-test-output.txt
+│   └── (03 and 04 will be added next)
 └── screenshots/
-    ├── 01-shadow-file.png
+    ├── 01a-passwd-d-shadow.png
+    ├── 01b-passwd-l-shadow.png
     ├── 02-ulimit-output.png
-    ├── 03-mv-test-output.png
-    └── 04-mkdir-test-output.png
+    ├── 02b-ulimit-focused.png
+    └── 02c-ulimit-test-dd.png
 ```
 
 ---
@@ -38,14 +39,21 @@ linux-system-management-2/
 ### 1️⃣ Examine `/etc/shadow` Password States
 
 ```bash
-sudo cat /etc/shadow | grep testuser
+# Create user and remove password
+sudo useradd testuser1
+sudo passwd -d testuser1
+sudo grep testuser1 /etc/shadow
+
+# Lock the user account
+sudo passwd -l testuser1
+sudo grep testuser1 /etc/shadow
 ```
 
-Try with a locked, unlocked, and passwordless test user.  
-Interpret fields like `!`, `!!`, and empty.
+📄 [`01a-shadow-passwd-d.txt`](outputs/01a-shadow-passwd-d.txt)  
+📄 [`01b-shadow-passwd-l.txt`](outputs/01b-shadow-passwd-l.txt)  
 
-📄 [`01-shadow-file.txt`](outputs/01-shadow-file.txt)  
-📷 ![01-shadow-file](screenshots/01-shadow-file.png)
+📷 ![01a-passwd-d-shadow](screenshots/01a-passwd-d-shadow.png)  
+📷 ![01b-passwd-l-shadow](screenshots/01b-passwd-l-shadow.png)
 
 ---
 
@@ -58,33 +66,31 @@ ulimit -n
 ```
 
 📄 [`02-ulimit-output.txt`](outputs/02-ulimit-output.txt)  
-📷 ![02-ulimit-output](screenshots/02-ulimit-output.png)
+📷 ![02-ulimit-output](screenshots/02-ulimit-output.png)  
+📷 ![02b-ulimit-focused](screenshots/02b-ulimit-focused.png)
 
 ---
 
-### 3️⃣ Test `mv -u` (Move if Newer)
+### 🧪 Deep Dive: Enforcing File Size Limit with `ulimit -f`
+
+To simulate a file size enforcement scenario, I temporarily limited the shell's max file size:
 
 ```bash
-touch oldfile.txt
-sleep 2
-echo "Newer version" > newfile.txt
-mv -u newfile.txt oldfile.txt
+ulimit -f 100
+dd if=/dev/zero of=testfile bs=1M count=2
 ```
 
-📄 [`03-mv-test-output.txt`](outputs/03-mv-test-output.txt)  
-📷 ![03-mv-test-output](screenshots/03-mv-test-output.png)
+📸 ![02c-ulimit-test-dd](screenshots/02c-ulimit-test-dd.png)
 
----
+> ✅ This triggered the expected failure:  
+> `File size limit exceeded (core dumped)`
 
-### 4️⃣ Test `mkdir -p` (Recursive Create)
+Restored default limit afterward:
 
 ```bash
-mkdir -p /tmp/testdir1/testdir2/testdir3
-ls -R /tmp/testdir1
+ulimit -f unlimited
+rm -f testfile
 ```
-
-📄 [`04-mkdir-test-output.txt`](outputs/04-mkdir-test-output.txt)  
-📷 ![04-mkdir-test-output](screenshots/04-mkdir-test-output.png)
 
 ---
 
