@@ -94,6 +94,37 @@ rm -f testfile
 
 ---
 
+### 3️⃣ Test `mv -u` (Move if Newer)
+
+```bash
+echo "I am older" > oldfile.txt
+sleep 2
+echo "I am newer" > newfile.txt
+mv -u newfile.txt oldfile.txt
+cat oldfile.txt
+```
+
+📄 [`03-mv-test-output.txt`](outputs/03-mv-test-output.txt)  
+📷 ![03-mv-test-output](screenshots/03-mv-test-output.png)
+
+> ✅ Confirmed that the content of `oldfile.txt` was replaced only because `newfile.txt` was newer.
+
+---
+
+### 4️⃣ Test `mkdir -p` (Recursive Directory Creation)
+
+```bash
+mkdir -p /tmp/testdir1/testdir2/testdir3
+ls -R /tmp/testdir1
+```
+
+📄 [`04-mkdir-test-output.txt`](outputs/04-mkdir-test-output.txt)  
+📷 ![04-mkdir-test-output](screenshots/04-mkdir-test-output.png)
+
+> ✅ Demonstrated ability to create nested directory trees in a single command.
+
+---
+
 ## ✅ Summary
 
 This project reinforces Linux+ exam skills around user account management, shadow file analysis, and essential file operations.  
