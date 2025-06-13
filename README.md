@@ -54,9 +54,6 @@ sudo passwd -l testuser1
 sudo grep testuser1 /etc/shadow
 ```
 
-📄 [`01a-shadow-passwd-d.txt`](outputs/01a-shadow-passwd-d.txt)  
-📄 [`01b-shadow-passwd-l.txt`](outputs/01b-shadow-passwd-l.txt)  
-
 📷 ![01a-passwd-d-shadow](screenshots/01a-passwd-d-shadow.png)  
 📷 ![01b-passwd-l-shadow](screenshots/01b-passwd-l-shadow.png)
 
@@ -70,7 +67,6 @@ ulimit -u
 ulimit -n
 ```
 
-📄 [`02-ulimit-output.txt`](outputs/02-ulimit-output.txt)  
 📷 ![02-ulimit-output](screenshots/02-ulimit-output.png)  
 📷 ![02b-ulimit-focused](screenshots/02b-ulimit-focused.png)
 
@@ -109,7 +105,6 @@ mv -u newfile.txt oldfile.txt
 cat oldfile.txt
 ```
 
-📄 [`03-mv-test-output.txt`](outputs/03-mv-test-output.txt)  
 📷 ![03-mv-test-output](screenshots/03-mv-test-output.png)
 
 > ✅ Confirmed that the content of `oldfile.txt` was replaced only because `newfile.txt` was newer.
@@ -123,7 +118,6 @@ mkdir -p /tmp/testdir1/testdir2/testdir3
 ls -R /tmp/testdir1
 ```
 
-📄 [`04-mkdir-test-output.txt`](outputs/04-mkdir-test-output.txt)  
 📷 ![04-mkdir-test-output](screenshots/04-mkdir-test-output.png)
 
 > ✅ Demonstrated ability to create nested directory trees in a single command.
