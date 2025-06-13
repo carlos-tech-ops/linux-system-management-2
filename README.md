@@ -23,13 +23,18 @@ linux-system-management-2/
 │   ├── 01a-shadow-passwd-d.txt
 │   ├── 01b-shadow-passwd-l.txt
 │   ├── 02-ulimit-output.txt
-│   └── (03 and 04 will be added next)
+│   ├── 02b-ulimit-focused.txt
+│   ├── 02c-ulimit-test-dd.txt
+│   ├── 03-mv-test-output.txt
+│   └── 04-mkdir-test-output.txt
 └── screenshots/
     ├── 01a-passwd-d-shadow.png
     ├── 01b-passwd-l-shadow.png
     ├── 02-ulimit-output.png
     ├── 02b-ulimit-focused.png
-    └── 02c-ulimit-test-dd.png
+    ├── 02c-ulimit-test-dd.png
+    ├── 03-mv-test-output.png
+    └── 04-mkdir-test-output.png
 ```
 
 ---
